@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreshCart — Farm-fresh groceries in minutes</title>
+  <meta name="description" content="FreshCart: premium farm-fresh groceries delivered to your door in 15 minutes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥑</text></svg>" />
+</head>
+<body>
+
+  <!-- ===== Preloader ===== -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">
+        <span class="leaf"></span>
+        <span class="leaf l2"></span>
+      </div>
+      <p class="loader-text">Fresh<span>Cart</span></p>
+      <div class="loader-bar"><span id="loaderBar"></span></div>
+    </div>
+  </div>
+
+  <!-- ===== Cursor + progress ===== -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ===== Navigation ===== -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#home" class="logo">
+        <span class="logo-mark">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c6 3 10 8 10 14a10 10 0 0 1-20 0C6 11 10 6 16 3Z" fill="currentColor"/><path d="M16 9v18" stroke="#0f3d2a" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        <span>Fresh<em>Cart</em></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#shop">Shop</a>
+        <a href="#deals">Deals</a>
+        <a href="#how">How it works</a>
+        <a href="#reviews">Reviews</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="searchToggle" aria-label="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <button class="icon-btn" id="wishBtn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9-9.2C1.6 7.3 4 4 7.4 4c2 0 3.4 1 4.6 2.6C13.2 5 14.6 4 16.6 4 20 4 22.4 7.3 21 10.8 19 15.6 12 20 12 20Z"/></svg>
+          <span class="badge" id="wishCount">0</span>
+        </button>
+        <button class="cart-btn magnetic" id="cartBtn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20.5" r="1.3"/><circle cx="17" cy="20.5" r="1.3"/></svg>
+          <span class="cart-label">Cart</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+      </div>
+    </div>
+
+    <div class="search-panel" id="searchPanel">
+      <div class="container">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="text" id="searchInput" placeholder="Search for avocados, milk, bread…" autocomplete="off" />
+          <kbd>Esc</kbd>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="home">
+      <div class="hero-bg">
+        <span class="blob b1"></span>
+        <span class="blob b2"></span>
+        <span class="blob b3"></span>
+        <div class="grain"></div>
+      </div>
+
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="pill reveal-hero">
+            <span class="pulse"></span> Delivering in <b><span class="live-eta">12</span> minutes</b> near you
+          </span>
+          <h1 class="hero-title" id="heroTitle">
+            <span class="line"><span>Farm-fresh</span></span>
+            <span class="line"><span>groceries,</span> <em><span>delivered</span></em></span>
+            <span class="line"><span>before your tea</span></span>
+            <span class="line"><span>gets cold.</span></span>
+          </h1>
+          <p class="hero-sub reveal-hero">
+            Hand-picked fruits, crisp vegetables and artisan essentials sourced straight from 200+ local farms. Order now and we'll handle the rest.
+          </p>
+
+          <form class="hero-search reveal-hero" id="heroSearch">
+            <span class="hs-icon">📍</span>
+            <input type="text" placeholder="Enter your delivery pincode" maxlength="6" inputmode="numeric" id="pincode" />
+            <button type="submit" class="btn btn-primary magnetic">
+              Check availability
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </form>
+
+          <div class="hero-stats reveal-hero">
+            <div class="stat"><b data-count="50">0</b><span>k+</span><small>Happy families</small></div>
+            <div class="stat"><b data-count="200">0</b><span>+</span><small>Partner farms</small></div>
+            <div class="stat"><b data-count="4.9" data-decimal="1">0</b><span>★</span><small>App rating</small></div>
+          </div>
+        </div>
+
+        <div class="hero-visual" id="heroScene">
+          <div class="scene">
+            <div class="orbit o1"></div>
+            <div class="orbit o2"></div>
+            <div class="disc">
+              <div class="disc-glow"></div>
+              <img class="hero-hero fimg" data-f="Basket" data-e="🧺" alt="Grocery basket" data-depth="40" />
+            </div>
+
+            <img class="float-item fimg f1" data-f="Avocado" data-e="🥑" alt="" data-depth="90" />
+            <img class="float-item fimg f2" data-f="Red apple" data-e="🍎" alt="" data-depth="70" />
+            <img class="float-item fimg f3" data-f="Carrot" data-e="🥕" alt="" data-depth="110" />
+            <img class="float-item fimg f4" data-f="Strawberry" data-e="🍓" alt="" data-depth="60" />
+            <img class="float-item fimg f5" data-f="Broccoli" data-e="🥦" alt="" data-depth="85" />
+            <img class="float-item fimg f6" data-f="Croissant" data-e="🥐" alt="" data-depth="50" />
+            <img class="float-item fimg f7" data-f="Lemon" data-e="🍋" alt="" data-depth="120" />
+
+            <div class="glass-card gc1" data-depth="140">
+              <span class="gc-icon">🛵</span>
+              <div><b>On the way</b><small>Arriving in <span class="live-eta">12</span> min</small></div>
+            </div>
+            <div class="glass-card gc2" data-depth="100">
+              <span class="gc-icon green">✓</span>
+              <div><b>100% Organic</b><small>Certified farms</small></div>
+            </div>
+            <div class="glass-card gc3" data-depth="160">
+              <div class="avatars"><i>👩🏽</i><i>👨🏻</i><i>👩🏾</i></div>
+              <div><b>4.9 ★</b><small>12k reviews</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#categories" class="scroll-hint" aria-label="Scroll down">
+        <span class="mouse"><span></span></span>
+        Scroll to explore
+      </a>
+    </section>
+
+    <!-- ===== Marquee ===== -->
+    <div class="marquee">
+      <div class="marquee-track" id="marquee"></div>
+    </div>
+
+    <!-- ===== Categories ===== -->
+    <section class="section" id="categories">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Shop by category</span>
+          <h2>Everything your kitchen <em>craves</em></h2>
+          <p>From sunrise-picked produce to oven-warm bread, browse aisles curated with love.</p>
+        </div>
+        <div class="cat-grid" id="catGrid"></div>
+      </div>
+    </section>
+
+    <!-- ===== Products ===== -->
+    <section class="section shop" id="shop">
+      <div class="container">
+        <div class="shop-head">
+          <div class="section-head left reveal">
+            <span class="eyebrow">Today's fresh picks</span>
+            <h2>Popular this <em>week</em></h2>
+          </div>
+          <div class="live-chip reveal">
+            <span class="live-dot"></span>
+            <b>LIVE</b>
+            <span>Stock &amp; prices updated <b id="liveAgo">just now</b></span>
+          </div>
+        </div>
+        <div class="filters-wrap reveal">
+          <div class="filters" id="filters">
+            <span class="filter-glider" id="filterGlider"></span>
+            <button class="active" data-filter="all">All</button>
+            <button data-filter="fruits">🍎 Fruits</button>
+            <button data-filter="vegetables">🥦 Vegetables</button>
+            <button data-filter="dairy">🥛 Dairy &amp; Eggs</button>
+            <button data-filter="staples">🌾 Atta, Rice &amp; Dal</button>
+            <button data-filter="snacks">🍪 Snacks</button>
+            <button data-filter="beverages">☕ Beverages</button>
+            <button data-filter="bakery">🥐 Bakery</button>
+            <button data-filter="household">🧼 Household</button>
+          </div>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+        <div class="more-wrap" id="moreWrap">
+          <button class="btn btn-ghost" id="moreBtn">
+            <span id="moreLabel">Show all products</span>
+            <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Deal ===== -->
+    <section class="section deal-section" id="deals">
+      <div class="container">
+        <div class="deal reveal">
+          <div class="deal-bg"><span></span><span></span><span></span></div>
+          <div class="deal-copy">
+            <span class="eyebrow light">Deal of the day</span>
+            <h2>The Weekend<br/><em>Harvest Box</em></h2>
+            <p>12 seasonal fruits &amp; veggies, a dozen free-range eggs and fresh sourdough. Enough for a family of four.</p>
+            <div class="price-row">
+              <span class="price-big">₹899</span>
+              <span class="price-old">₹1,499</span>
+              <span class="save-chip">Save 40%</span>
+            </div>
+            <div class="countdown" id="countdown">
+              <div><b id="cdH">00</b><small>Hours</small></div>
+              <div><b id="cdM">00</b><small>Mins</small></div>
+              <div><b id="cdS">00</b><small>Secs</small></div>
+            </div>
+            <button class="btn btn-lime magnetic" id="dealBtn">
+              Grab the box
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+
+          <div class="deal-visual">
+            <div class="box3d" id="box3d">
+              <div class="face front"><img class="fimg" data-f="Watermelon" data-e="🍉" alt=""><span>Fresh</span></div>
+              <div class="face back"><img class="fimg" data-f="Bread" data-e="🍞" alt=""><span>Baked</span></div>
+              <div class="face right"><img class="fimg" data-f="Egg" data-e="🥚" alt=""><span>Free-range</span></div>
+              <div class="face left"><img class="fimg" data-f="Grapes" data-e="🍇" alt=""><span>Juicy</span></div>
+              <div class="face top"><img class="fimg" data-f="Leafy green" data-e="🥬" alt=""><span>Organic</span></div>
+              <div class="face bottom"><img class="fimg" data-f="Mango" data-e="🥭" alt=""><span>Sweet</span></div>
+            </div>
+            <div class="box-shadow"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3D Ring ===== -->
+    <section class="section ring-section" id="seasonal">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">In season now</span>
+          <h2>Spin through the <em>harvest</em></h2>
+          <p>Drag the carousel to explore what our farmers picked this morning.</p>
+        </div>
+      </div>
+      <div class="ring-stage" id="ringStage">
+        <div class="ring" id="ring"></div>
+        <div class="ring-floor"></div>
+      </div>
+      <div class="ring-controls">
+        <button class="round-btn" id="ringPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <span class="ring-hint">Drag or use arrows</span>
+        <button class="round-btn" id="ringNext" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </section>
+
+    <!-- ===== How it works ===== -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Simple as 1-2-3</span>
+          <h2>From farm to fridge in <em>minutes</em></h2>
+        </div>
+        <div class="steps">
+          <div class="step reveal" style="--d:0">
+            <div class="step-num">01</div>
+            <div class="step-icon"><img class="fimg" data-f="Mobile phone" data-e="📱" alt=""></div>
+            <h3>Pick your favourites</h3>
+            <p>Browse 5,000+ fresh products and fill your cart in a few taps.</p>
+          </div>
+          <div class="step-line"><svg viewBox="0 0 120 20" preserveAspectRatio="none"><path d="M0 10 Q30 0 60 10 T120 10"/></svg></div>
+          <div class="step reveal" style="--d:1">
+            <div class="step-num">02</div>
+            <div class="step-icon"><img class="fimg" data-f="Package" data-e="📦" alt=""></div>
+            <h3>We pack with care</h3>
+            <p>Our team hand-checks every item and packs it in eco-friendly bags.</p>
+          </div>
+          <div class="step-line"><svg viewBox="0 0 120 20" preserveAspectRatio="none"><path d="M0 10 Q30 20 60 10 T120 10"/></svg></div>
+          <div class="step reveal" style="--d:2">
+            <div class="step-num">03</div>
+            <div class="step-icon"><img class="fimg" data-f="Motor scooter" data-e="🛵" alt=""></div>
+            <h3>Delivered in 15 min</h3>
+            <p>Track your rider live and get groceries at your doorstep, still fresh.</p>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="feature reveal tilt"><span>🌱</span><b>100% Organic</b><small>Certified pesticide-free produce</small></div>
+          <div class="feature reveal tilt"><span>❄️</span><b>Cold-chain fresh</b><small>Temperature-controlled delivery</small></div>
+          <div class="feature reveal tilt"><span>↩️</span><b>Easy returns</b><small>No-questions-asked refunds</small></div>
+          <div class="feature reveal tilt"><span>🔒</span><b>Secure payments</b><small>UPI, cards &amp; cash on delivery</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Testimonials ===== -->
+    <section class="section reviews" id="reviews">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow light">Loved by 50,000+ families</span>
+          <h2>Words from our <em>neighbours</em></h2>
+        </div>
+        <div class="t-wrap reveal">
+          <div class="t-track" id="tTrack"></div>
+          <div class="t-dots" id="tDots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== App / Newsletter ===== -->
+    <section class="section" id="app">
+      <div class="container">
+        <div class="app-card reveal">
+          <div class="app-copy">
+            <span class="eyebrow">Get the app</span>
+            <h2>Your pocket-sized <em>farmers market</em></h2>
+            <p>Get ₹150 off your first order, plus early access to seasonal drops and members-only deals.</p>
+            <form class="newsletter" id="newsletter">
+              <input type="email" placeholder="you@example.com" required />
+              <button class="btn btn-primary magnetic" type="submit">Get ₹150 off</button>
+            </form>
+            <div class="stores">
+              <a href="#" class="store"><span><svg viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.1ZM13.9 4.9c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5Z"/></svg></span><div><small>Download on the</small><b>App Store</b></div></a>
+              <a href="#" class="store"><span>▶</span><div><small>Get it on</small><b>Google Play</b></div></a>
+            </div>
+          </div>
+          <div class="phone-wrap">
+            <div class="phone tilt" data-tilt-max="14">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="ps-top"><b>Hi, Priya 👋</b><small>What's cooking today?</small></div>
+                <div class="ps-banner"><span>Up to<br/><b>50% OFF</b></span><img class="fimg" data-f="Cherries" data-e="🍒" alt=""></div>
+                <div class="ps-grid">
+                  <div><img class="fimg" data-f="Banana" data-e="🍌" alt=""><small>Banana</small></div>
+                  <div><img class="fimg" data-f="Tomato" data-e="🍅" alt=""><small>Tomato</small></div>
+                  <div><img class="fimg" data-f="Cheese wedge" data-e="🧀" alt=""><small>Cheese</small></div>
+                  <div><img class="fimg" data-f="Kiwi fruit" data-e="🥝" alt=""><small>Kiwi</small></div>
+                </div>
+                <div class="ps-cta">Checkout · ₹486</div>
+              </div>
+            </div>
+            <img class="phone-float fimg pf1" data-f="Peach" data-e="🍑" alt="">
+            <img class="phone-float fimg pf2" data-f="Pineapple" data-e="🍍" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="f-brand">
+          <a href="#home" class="logo light">
+            <span class="logo-mark"><svg viewBox="0 0 32 32"><path d="M16 3c6 3 10 8 10 14a10 10 0 0 1-20 0C6 11 10 6 16 3Z" fill="currentColor"/><path d="M16 9v18" stroke="#0f3d2a" stroke-width="2" stroke-linecap="round"/></svg></span>
+            <span>Fresh<em>Cart</em></span>
+          </a>
+          <p>Farm-fresh groceries delivered with care. Supporting local farmers since 2021.</p>
+          <div class="socials">
+            <a href="#" aria-label="Instagram">IG</a>
+            <a href="#" aria-label="Twitter">X</a>
+            <a href="#" aria-label="Facebook">FB</a>
+            <a href="#" aria-label="YouTube">YT</a>
+          </div>
+        </div>
+        <div class="f-col"><h4>Shop</h4><a href="#shop">Fruits</a><a href="#shop">Vegetables</a><a href="#shop">Dairy &amp; Eggs</a><a href="#shop">Bakery</a></div>
+        <div class="f-col"><h4>Company</h4><a href="#">About us</a><a href="#">Our farmers</a><a href="#">Careers</a><a href="#">Press</a></div>
+        <div class="f-col"><h4>Help</h4><a href="#">FAQs</a><a href="#">Delivery areas</a><a href="#">Returns</a><a href="#">Contact</a></div>
+      </div>
+      <div class="footer-big">FreshCart</div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> FreshCart. All rights reserved.</span>
+        <span>Made with 🥑 in India</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Cart drawer ===== -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer" aria-label="Shopping cart">
+    <div class="drawer-head">
+      <h3>Your basket <span id="drawerCount">(0)</span></h3>
+      <button class="icon-btn" id="closeDrawer" aria-label="Close cart"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="free-ship">
+      <p id="freeShipText">Add <b>₹499</b> more for free delivery</p>
+      <div class="fs-bar"><span id="freeShipBar"></span></div>
+    </div>
+    <div class="drawer-items" id="drawerItems"></div>
+    <div class="drawer-foot">
+      <div class="row"><span>Subtotal</span><b id="subtotal">₹0</b></div>
+      <div class="row"><span>Delivery</span><b id="delivery">₹0</b></div>
+      <div class="row total"><span>Total</span><b id="total">₹0</b></div>
+      <button class="btn btn-primary full" id="checkoutBtn">Proceed to checkout</button>
+    </div>
+  </aside>
+
+  <!-- ===== Quick view modal ===== -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-card" id="modalCard"></div>
+  </div>
+
+  <!-- ===== Live purchase popup ===== -->
+  <div class="live-pop" id="livePop" role="status" aria-live="polite"></div>
+
+  <!-- ===== Toasts ===== -->
+  <div class="toasts" id="toasts"></div>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+  </button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
